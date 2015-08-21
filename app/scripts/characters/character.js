@@ -1,10 +1,9 @@
 export default class Character {
-  constructor(x, y, w, h, ctx, speed) {
+  constructor(x, y, w, h, speed) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
-    this.ctx = ctx;
     this.speed = speed;
   }
   moveRight() {
