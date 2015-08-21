@@ -104,6 +104,10 @@ module.exports = function(grunt) {
 				files: 'app/*.jade',
 				tasks: 'jade'
 			},
+			assets: {
+				files: 'app/img/*.*',
+				tasks: 'copy'
+			},
 			allFiles : {
 				files: ['dist/scripts/*.js', 'dist/css/*.css','dist/*.html'],
 				options: {
