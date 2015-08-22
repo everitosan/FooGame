@@ -3,8 +3,10 @@ import Bullet from '../env/bullet';
 
 export default class Player extends Character{
   constructor(x, y, sprite) {
-    super(x, y, 100, 15, 87, 120, 20, sprite);
+    super(x, y, 100, 20, 87, 90, 20, sprite);
     this.bullets = [];
+    this.z = false;
+    this.counter = 0;
   }
   draw (ctx) {
     this.drawSprite(ctx);
@@ -13,6 +15,15 @@ export default class Player extends Character{
 
   drawSprite (ctx) {
     ctx.save();
+    if(this.z) {
+        this.counter ++;
+        ctx.scale(1.225,1.225);
+        ctx.translate(-this.w, -this.h);
+        if(this.counter > 50) {
+          this.z = 0;
+          this.counter = 0;
+        }
+    }
     ctx.drawImage(this.sprite, this.sx, this.sy, this.w, this.h, this.x, this.y, this.w, this.h);
     ctx.restore();
   }
@@ -31,9 +42,6 @@ export default class Player extends Character{
     this.bullets.push(Bull);
   }
   jump() {
-
-  }
-  toString() {
-    return '(' + this.x + ',' + this.y + ',' + this.w +','+ this.h +')';
+    this.z = true;
   }
  }

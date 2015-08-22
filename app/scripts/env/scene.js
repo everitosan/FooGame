@@ -97,7 +97,7 @@ export default class Scene{
   }
   obstacleCollision(P1, Obstacles) {
     Obstacles.forEach(function(obstacle, indexObstacle, Obstacles){
-        if(this.hit(P1, obstacle)){
+        if(this.hit(P1, obstacle) && !P1.z){
           this.continue = false;
         }
     }, this);
