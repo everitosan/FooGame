@@ -8,13 +8,8 @@ export default class Bullet {
   move(y) {
     this.y -=y;
   }
-  draw(ctx) {
+  draw(ctx, sprite) {
     ctx.save();
-    //ctx.fillStyle = 'red';
-    //ctx.fillRect(this.x, this.y, this.w, this.h);
-    let sprite = new Image();
-  	sprite.src = "../img/sprites.png";
-
     ctx.drawImage(sprite, 138, 159, 153, 189, this.x, this.y, 153, 189);
     ctx.restore();
   }
