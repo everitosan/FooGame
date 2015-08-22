@@ -16,7 +16,7 @@ That should take care of the dependencies installation and code compilation.
 ## How to play
  - a | ← - Move to Left
  - d | → - Move to Right
- - s | ↑ - Move Down
- - w | ↓ - Move Up
+ - s | ↓ - Move Down
+ - w | ↑ - Move Up
  - space - Jump
  - ↵   - Shoot
