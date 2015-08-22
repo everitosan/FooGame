@@ -80,7 +80,7 @@ function render() {
 	MySC.bulletEnemyCollision(P1.bullets, Enemies);
 	MySC.bulletObstacleCollision(P1.bullets, Obstacles);
 	MySC.obstacleCollision(P1, Obstacles);
-	requestAnimationFrame(render);
+	(MySC.continue)? requestAnimationFrame(render):MySC.end(ctx, Enemies.length);
 }
 
 function createEnemies(numberOfEnemies, sprite) {

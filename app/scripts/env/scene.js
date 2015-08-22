@@ -3,12 +3,27 @@ export default class Scene{
   constructor(sheet) {
     this.sheet = sheet;
     this.counter = 0;
+    this.continue = true;
   }
   start(ctx) {
     ctx.save();
     ctx.fillStyle = '#333';
     ctx.fillRect(0,0,innerWidth, innerHeight);
     ctx.drawImage(this.sheet, 0, 0);
+    ctx.restore();
+  }
+  end(ctx, eneLen) {
+    ctx.save();
+    ctx.fillStyle = 'rgba(0,0,0,.8)';
+    ctx.fillRect(0, 0, innerWidth, innerHeight);
+    ctx.fillStyle = 'rgba(255,255,255,.8)';
+    ctx.font='Bold, 80pt, Helvetica';
+    if(eneLen > 0) {//You loose
+      ctx.fillText('You lose!', innerWidth/2, innerHeight/2);
+    }
+    else { //You Win
+      ctx.fillText('You Win!', innerWidth/2, innerHeight/2);
+    }
     ctx.restore();
   }
   events(P1) {
@@ -64,6 +79,9 @@ export default class Scene{
         if(this.hit(bullet, enemy)){
           enemies.splice(indexEnemy, 1);
           bullets.splice(indexBullet, 1);
+          if (enemies.length == 0) {
+            this.continue = false;
+          }
         }
       }, this);
     }, this);
@@ -80,7 +98,7 @@ export default class Scene{
   obstacleCollision(P1, Obstacles) {
     Obstacles.forEach(function(obstacle, indexObstacle, Obstacles){
         if(this.hit(P1, obstacle)){
-          Obstacles.splice(indexObstacle, 1);
+          this.continue = false;
         }
     }, this);
   }
