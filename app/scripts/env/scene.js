@@ -8,7 +8,7 @@ export default class Scene{
     ctx.save();
     ctx.fillStyle = '#333';
     ctx.fillRect(0,0,innerWidth, innerHeight);
-    ctx.drawImage(this.sheet, -100, -50);
+    ctx.drawImage(this.sheet, 0, 0);
     ctx.restore();
   }
   events(P1) {
@@ -35,8 +35,6 @@ export default class Scene{
   }
   drawEmenies(arr, ctx){
     let counter = this.counter ++;
-
-    ctx.save();
     arr.forEach(function(enemy) {
       if(enemy.direction ==1) {
         enemy.x +=(1)*Math.sin(counter * Math.PI / 15)*5;
@@ -45,10 +43,8 @@ export default class Scene{
         enemy.x +=(-1)*Math.sin(counter * Math.PI / 15)*5;
       }
 
-      ctx.fillStyle = '#8F26AD';
-      ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
+      enemy.drawSprite(ctx);
     });
-    ctx.restore();
   }
   bulletCollition(Bullets, Enemies) {
     Bullets.forEach(function(bullet, indexBullet, bullets){

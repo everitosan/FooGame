@@ -1,7 +1,10 @@
 export default class Character {
-  constructor(x, y, w, h, speed) {
+  constructor(x, y, sx, sy, w, h, speed, sprite) {
+    this.sprite = sprite;
     this.x = x;
     this.y = y;
+    this.sx = sx;
+    this.sy = sy;
     this.w = w;
     this.h = h;
     this.speed = speed;
@@ -40,4 +43,5 @@ export default class Character {
       this.y +=this.speed;
     }
   }
+
 }
