@@ -20,7 +20,7 @@ export default class Player extends Character{
   drawBullets(ctx) {
     for (let i in this.bullets) {
       this.bullets[i].move(5);
-      this.bullets[i].draw(ctx);
+      this.bullets[i].draw(ctx, this.sprite);
     };
     this.bullets = this.bullets.filter(function(filter) {
       return filter.y>0;

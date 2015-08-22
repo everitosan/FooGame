@@ -46,7 +46,19 @@ export default class Scene{
       enemy.drawSprite(ctx);
     });
   }
-  bulletCollition(Bullets, Enemies) {
+
+  drawObstacles(arr, ctx) {
+    //Draw valid meteors
+    arr.forEach(function(obstacle){
+      obstacle.draw(ctx);
+    });
+    //Filter valid meteors
+    arr = arr.filter(function(filter) {
+      return filter.y<innerHeight;
+    });
+  }
+
+  bulletEnemyCollision(Bullets, Enemies) {
     Bullets.forEach(function(bullet, indexBullet, bullets){
       Enemies.forEach(function(enemy, indexEnemy, enemies){
         if(this.hit(bullet, enemy)){
@@ -54,6 +66,22 @@ export default class Scene{
           bullets.splice(indexBullet, 1);
         }
       }, this);
+    }, this);
+  }
+  bulletObstacleCollision(Bullets, Obstacles) {
+    Bullets.forEach(function(bullet, indexBullet, bullets){
+      Obstacles.forEach(function(obstacle){
+        if(this.hit(bullet, obstacle)){
+          bullets.splice(indexBullet, 1);
+        }
+      }, this);
+    }, this);
+  }
+  obstacleCollision(P1, Obstacles) {
+    Obstacles.forEach(function(obstacle, indexObstacle, Obstacles){
+        if(this.hit(P1, obstacle)){
+          Obstacles.splice(indexObstacle, 1);
+        }
     }, this);
   }
 

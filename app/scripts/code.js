@@ -2,13 +2,17 @@ import Player from './characters/player';
 import Enemy from './characters/enemy';
 import Enemy2 from './characters/enemy2';
 import Scene from './env/scene';
+import Meteor1 from './env/meteor1';
+import Meteor2 from './env/meteor2';
+
 let $ = require('jquery');
 let PreloadJS = require('PreloadJS');
 
 let $canvas,
 		MySC,
 		P1,
-		Enemies = [];
+		Enemies = [],
+		Obstacles = [];
 
 let preloader,
 		manifest = [
@@ -62,6 +66,7 @@ function loadComplete (event) {
 	P1  = new Player(width/2, height*.8, sprite);
 
 	createEnemies(5, sprite);
+	createObstacles(5, sprite);
 	MySC.events(P1);
 	render();
 }
@@ -69,9 +74,12 @@ function loadComplete (event) {
 //Loop
 function render() {
 	MySC.start(ctx);
+	MySC.drawObstacles(Obstacles, ctx);
 	MySC.drawEmenies(Enemies, ctx);
 	P1.draw(ctx);
-	MySC.bulletCollition(P1.bullets, Enemies);
+	MySC.bulletEnemyCollision(P1.bullets, Enemies);
+	MySC.bulletObstacleCollision(P1.bullets, Obstacles);
+	MySC.obstacleCollision(P1, Obstacles);
 	requestAnimationFrame(render);
 }
 
@@ -86,5 +94,14 @@ function createEnemies(numberOfEnemies, sprite) {
 		Enemies.push(newEnemy);
 		Rx = Rx + spaceW;
 		dir = !dir; //works as a toggle for the initial direction of movement for every enemy
+	};
+}
+
+function createObstacles(numberOfObstacles, sprite) {
+	for(let i = 0; i<numberOfObstacles; i++){
+		let Rx=Math.floor(Math.random() * (width*.8 - 10 + 1)) + 10 ;
+		let Ry=Math.floor(Math.random() * (height*.3 + 5 * height + 1)) + (-5 * height) ;
+		let newMeteor = Math.random() < 0.5 ? new Meteor2(Rx, Ry, sprite): new Meteor1(Rx, Ry, sprite);
+		Obstacles.push(newMeteor);
 	};
 }
