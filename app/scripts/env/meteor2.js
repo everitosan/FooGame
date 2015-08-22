@@ -8,9 +8,9 @@ export default class Meteor2 extends Obstacle{
   }
 
   draw(ctx){
-    this.move(2);
+    this.move(6);
     ctx.save();
-    ctx.drawImage(this.sprite, 310, 28,  this.w, this.h, this.x, this.y, this.w, this.h);
+    ctx.drawImage(this.sprite, 310, 30,  this.w, this.h, this.x, this.y, this.w, this.h);
     ctx.restore();
   }
 }
