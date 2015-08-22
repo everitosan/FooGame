@@ -48,13 +48,8 @@ function intiCanvas( ) {
 //Set the enviroment for the level
 function initScene() {
 	preloader = new createjs.LoadQueue(true);
-	preloader.on("progress", handleFileProgress);
 	preloader.loadManifest(manifest);
 	preloader.on("complete", loadComplete);
-}
-
-function handleFileProgress(event) {
-    console.log((preloader.progress*100|0) + " % Loaded");
 }
 
 function loadComplete (event) {

@@ -18,18 +18,16 @@ export default class Player extends Character{
   }
 
   drawBullets(ctx) {
-    ctx.save();
     for (let i in this.bullets) {
       this.bullets[i].move(5);
       this.bullets[i].draw(ctx);
     };
-    ctx.restore();
     this.bullets = this.bullets.filter(function(filter) {
       return filter.y>0;
     });
   }
   fire() {
-    let Bull = new Bullet(this.x+(this.w*.5), this.y-(this.h*.5));
+    let Bull = new Bullet(this.x+(this.w*.47), this.y-(this.h*.5));
     this.bullets.push(Bull);
   }
   jump() {
