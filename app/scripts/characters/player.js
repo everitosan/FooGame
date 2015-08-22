@@ -2,21 +2,21 @@ import Character from './character';
 import Bullet from '../env/bullet';
 
 export default class Player extends Character{
-  constructor(x, y) {
-    super(x, y, 50, 50, 20);
+  constructor(x, y, sprite) {
+    super(x, y, 100, 15, 87, 120, 20, sprite);
     this.bullets = [];
   }
   draw (ctx) {
-    this.drawPlayer(ctx);
+    this.drawSprite(ctx);
     this.drawBullets(ctx);
   }
 
-  drawPlayer (ctx) {
+  drawSprite (ctx) {
     ctx.save();
-    ctx.fillStyle = 'white';
-    ctx.fillRect(this.x, this.y, this.w, this.h);
+    ctx.drawImage(this.sprite, this.sx, this.sy, this.w, this.h, this.x, this.y, this.w, this.h);
     ctx.restore();
   }
+
   drawBullets(ctx) {
     ctx.save();
     for (let i in this.bullets) {
